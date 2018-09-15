@@ -7,6 +7,9 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
+/**
+ * 监听端口的输入计算WordCount
+ */
 public class WindowWordCount {
 
     public static void main(String[] args) throws Exception {
