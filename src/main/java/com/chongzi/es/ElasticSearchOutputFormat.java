@@ -37,6 +37,10 @@ public class ElasticSearchOutputFormat<T> extends RichOutputFormat<T> {
     public static final String CONFIG_KEY_BULK_FLUSH_MAX_ACTIONS = "bulk.flush.max.actions";
     public static final String CONFIG_KEY_BULK_FLUSH_MAX_SIZE_MB = "bulk.flush.max.size.mb";
     public static final String CONFIG_KEY_BULK_FLUSH_INTERVAL_MS = "bulk.flush.interval.ms";
+    public static final String CONFIG_KEY_BULK_FLUSH_BACKOFF_ENABLE = "bulk.flush.backoff.enable";
+    public static final String CONFIG_KEY_BULK_FLUSH_BACKOFF_TYPE = "bulk.flush.backoff.type";
+    public static final String CONFIG_KEY_BULK_FLUSH_BACKOFF_RETRIES = "bulk.flush.backoff.retries";
+    public static final String CONFIG_KEY_BULK_FLUSH_BACKOFF_DELAY = "bulk.flush.backoff.delay";
 
     private static final long serialVersionUID = 1L;
 
@@ -97,7 +101,6 @@ public class ElasticSearchOutputFormat<T> extends RichOutputFormat<T> {
         }
         Settings settings = Settings.builder().put(userConfig).build();
         TransportClient transportClient = new PreBuiltTransportClient(settings, new Class[0]);
-        //TransportClient transportClient = TransportClient.builder().settings(settings).build();
         for (TransportAddress transport : transportNodes) {
             transportClient.addTransportAddress(transport);
         }

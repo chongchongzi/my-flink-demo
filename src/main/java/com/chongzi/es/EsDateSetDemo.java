@@ -9,10 +9,7 @@ import org.elasticsearch.client.Requests;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * DataSet写入ES示例
@@ -25,10 +22,10 @@ public class EsDateSetDemo {
                 .pojoType(Record.class, "playerName", "country", "year", "game", "gold", "silver", "bronze", "total");
 
         //3.将数据写入到自定义的sink中（这里是es）
-        Map<String, String> config = new HashMap<>();
+        Map<String, String> config = new LinkedHashMap<>();
         config.put("cluster.name", "esearch-one");
         //该配置表示批量写入ES时的记录条数
-        config.put("bulk.flush.max.actions", "1000");
+        //config.put("bulk.flush.max.actions", "1000");
 
         List<InetSocketAddress> transportAddresses = new ArrayList<>();
         transportAddresses.add(new InetSocketAddress(InetAddress.getByName("10.60.34.48"), 9300));
