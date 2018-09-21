@@ -9,14 +9,14 @@
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. hadoop
+2. yarn
+3. flink
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
+1. mvn clean package
+2. ${FLINK_HOME}/bin/flink run -c com.chongzi.hdfs.WordCountHdfs /usr/local/projects/my-flink-demo-1.0.0.jar
 3. xxxx
 
 #### 参与贡献
