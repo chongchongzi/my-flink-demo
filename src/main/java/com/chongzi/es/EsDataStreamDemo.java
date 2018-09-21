@@ -27,7 +27,7 @@ public class EsDataStreamDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         //2.准备数据
-        DataStream<String> input = env.fromElements("a","b","c");
+        DataStream<String> input = env.fromElements("d","e","f");
 
         //3.将数据写入到自定义的sink中（这里是es）
         Map<String, String> config = new HashMap<>();
