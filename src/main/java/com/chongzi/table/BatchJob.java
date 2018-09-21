@@ -1,5 +1,6 @@
 package com.chongzi.table;
 
+import com.chongzi.bean.Record;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.api.Table;

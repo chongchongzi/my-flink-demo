@@ -1,5 +1,6 @@
 package com.chongzi.hdfs;
 
+import com.chongzi.bean.Record;
 import com.chongzi.es.ElasticSearchOutputFormat;
 import com.chongzi.es.ElasticsearchSinkFunction;
 import com.chongzi.es.RequestIndexer;

@@ -1,4 +1,4 @@
-package com.chongzi.table;
+package com.chongzi.bean;
 
 public class Record {
 

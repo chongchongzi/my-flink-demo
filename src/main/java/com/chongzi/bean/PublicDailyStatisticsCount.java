@@ -1,4 +1,4 @@
-package com.chongzi.hdfs;
+package com.chongzi.bean;
 
 public class PublicDailyStatisticsCount {
 }
