@@ -1,7 +1,5 @@
 package com.chongzi.es;
 
-import com.chongzi.mysql.Student;
-import com.chongzi.mysql.StudentSinkToMysql;
 import org.apache.flink.api.common.functions.RuntimeContext;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

@@ -39,6 +39,10 @@
         <mysql.version>5.1.35</mysql.version>
         <kafka.version>0.10.2.0</kafka.version>
         <elasticsearch.version>5.6.4</elasticsearch.version>
+        <druid.version>2.4</druid.version>
+        <avatica.version>1.10.0</avatica.version>
+        <hutool.varsion>4.1.15</hutool.varsion>
+        <gson.varsion>2.8.5</gson.varsion>
     </properties>
 
     <dependencies>
@@ -114,6 +118,38 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-hadoop-compatibility_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>in.zapr.druid</groupId>
+            <artifactId>druidry</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.calcite.avatica/avatica -->
+        <!-- Avatica JDBC驱动程序进行Druid SQL查询-->
+        <dependency>
+            <groupId>org.apache.calcite.avatica</groupId>
+            <artifactId>avatica</artifactId>
+            <version>${avatica.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite.avatica</groupId>
+            <artifactId>avatica-server</artifactId>
+            <version>${avatica.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite.avatica</groupId>
+            <artifactId>avatica-core</artifactId>
+            <version>${avatica.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.varsion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.varsion}</version>
         </dependency>
     </dependencies>
     <build>
