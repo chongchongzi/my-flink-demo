@@ -41,7 +41,7 @@ public class KafkaToKafkaDemo {
             topic = "glbg-analitic";
         }
         if(StrUtil.isBlank(topicId)){
-            topic = "glbg-analitic-json-pc";
+            topicId = "glbg-analitic-json-pc";
         }
         properties.setProperty("bootstrap.servers", bootstrapServers);
         properties.setProperty("group.id", groupId);
