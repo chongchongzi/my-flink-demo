@@ -39,7 +39,7 @@ public class WordCountTable {
 				.filter("frequency = 2");
 
 		DataSet<WC> result = tEnv.toDataSet(filtered, WC.class);
-
+		result.writeAsText("D://projects//my-flink-demo//src//main//resources//data//result.csv").setParallelism(3);
 		result.print();
 	}
 

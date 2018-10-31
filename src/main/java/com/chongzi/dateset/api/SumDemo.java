@@ -18,7 +18,7 @@ public class SumDemo {
                 new Tuple3(16,"lisi",194.5),
                 new Tuple3(17,"lisi",184.5),
                 new Tuple3(18,"lisi",174.5));
-        //2.获取age最小的元素
+        //2.获取age汇总的元素
         DataSet<Tuple3<Integer,String, Double>> input2  = input.sum(0);
         input2.print();
     }
