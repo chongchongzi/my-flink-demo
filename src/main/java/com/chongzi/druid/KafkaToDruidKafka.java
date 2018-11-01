@@ -19,7 +19,7 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer010;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer011;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class KafkaToDruidKafka {
         String bootstrapServers = "127.0.0.1:9092";
         String groupId = "realtime-product-2018102601";
         String topic = "glbg-analitic";
-        String producerTopic = "druid";
+        String producerTopic = "my-product-detail";
         if (params.has("bootstrapServers")) {
             bootstrapServers = params.get("bootstrapServers");
         }
@@ -66,7 +66,7 @@ public class KafkaToDruidKafka {
         DataStream<String> stringDataStream = messageStream
                 .filter(s -> s.contains("/_app.gif?"))
                 .flatMap(new Tokenizer());
-        FlinkKafkaProducer010<String> myProducer = new FlinkKafkaProducer010<>(bootstrapServers, producerTopic,
+        FlinkKafkaProducer011<String> myProducer = new FlinkKafkaProducer011<>(bootstrapServers, producerTopic,
                 new SimpleStringSchema());
         myProducer.setWriteTimestampToKafka(true);
         stringDataStream.addSink(myProducer);
