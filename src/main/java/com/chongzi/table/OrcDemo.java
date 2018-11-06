@@ -7,6 +7,7 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.types.Row;
+import org.apache.hadoop.conf.Configuration;
 
 import java.util.List;
 
@@ -23,6 +24,16 @@ public class OrcDemo {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
+
+        /*Configuration config = new Configuration();
+        config.set("fs.defaultFS", "hdfs://127.0.0.1:8020/");
+        String filePath = "hdfs://127.0.0.1:8020/orc/test.orc";
+         OrcTableSource orc = OrcTableSource.builder()
+                .path(filePath)
+                .forOrcSchema(TEST_SCHEMA_FLAT)
+                .withConfiguration(config)
+                .build();
+        */
         OrcTableSource orc = OrcTableSource.builder()
                 .path(TEST_FILE_FLAT)
                 .forOrcSchema(TEST_SCHEMA_FLAT)
