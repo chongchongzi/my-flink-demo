@@ -125,6 +125,11 @@
             <version>${flink.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.bahir</groupId>
+            <artifactId>flink-connector-redis_2.11</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>in.zapr.druid</groupId>
             <artifactId>druidry</artifactId>
             <version>${druid.version}</version>
