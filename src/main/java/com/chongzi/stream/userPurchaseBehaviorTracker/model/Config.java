@@ -28,7 +28,7 @@ public class Config implements Serializable {
      */
     private String registerDate;
     /**
-     * 历史购买时间
+     * 历史购买次数
      */
     private Integer historyPurchaseTimes;
     /**

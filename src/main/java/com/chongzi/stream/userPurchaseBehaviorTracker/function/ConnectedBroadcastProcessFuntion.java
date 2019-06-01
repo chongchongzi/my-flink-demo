@@ -31,6 +31,9 @@ public class ConnectedBroadcastProcessFuntion extends KeyedBroadcastProcessFunct
 
     private Config defaultConfig = new Config("APP","2018-01-01",0,3);
 
+    /**
+     * 某个user的状态
+     */
     // (channel, Map<uid, UserEventContainer>)
     private final MapStateDescriptor<String, Map<String, UserEventContainer>> userMapStateDesc =
             new MapStateDescriptor<>(
@@ -38,6 +41,13 @@ public class ConnectedBroadcastProcessFuntion extends KeyedBroadcastProcessFunct
                     BasicTypeInfo.STRING_TYPE_INFO,
                     new MapTypeInfo<>(String.class, UserEventContainer.class));
 
+    /**
+     * 处理事件流
+     * @param value 事件
+     * @param ctx 上下文
+     * @param out
+     * @throws Exception
+     */
     @Override
     public void processElement(UserEvent value, ReadOnlyContext ctx, Collector<EvaluatedResult> out) throws Exception {
         String userId = value.getUserId();
@@ -68,15 +78,27 @@ public class ConnectedBroadcastProcessFuntion extends KeyedBroadcastProcessFunct
 
         // check whether a user purchase event arrives
         // if true, then compute the purchase path length, and prepare to trigger predefined actions
+        /**
+         * 判断类型是否购买，是的话才做发送处理
+         */
         if (eventType == EventType.PURCHASE) {
             log.info("Receive a purchase event: " + value);
             Optional<EvaluatedResult> result = compute(config, userEventContainerMap.get(userId));
             result.ifPresent(r -> out.collect(result.get()));
-            // clear evaluated user's events
+            /**
+             * 发完出去就清空状态
+             */
             state.get(channel).remove(userId);
         }
     }
 
+    /**
+     * 处理配置流
+     * @param value
+     * @param ctx
+     * @param out
+     * @throws Exception
+     */
     @Override
     public void processBroadcastElement(Config value, Context ctx, Collector<EvaluatedResult> out) throws Exception {
         String channel = value.getChannel();
@@ -99,6 +121,9 @@ public class ConnectedBroadcastProcessFuntion extends KeyedBroadcastProcessFunct
      * @return
      */
     private Optional<EvaluatedResult> compute(Config config, UserEventContainer container) {
+        /**
+         * 防止flink空指针，设置一个空对象
+         */
         Optional<EvaluatedResult> result = Optional.empty();
         String channel = config.getChannel();
         int historyPurchaseTimes = config.getHistoryPurchaseTimes();

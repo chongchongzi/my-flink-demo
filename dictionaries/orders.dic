@@ -1,0 +1,7 @@
+orderNo=$Func{uuid()}
+userId=$Func{intRand(10000,99999)}
+goodId=$Func{intRand(1,5)}
+goodsMoney=$Func{doubleRand(2099, 100000, 2)}
+realTotalMoney=$Func{doubleRand(1000, 100000, 2)}
+payFrom=1|||2|||1|||1|||2
+province=$Func{intRand(1,34)}
