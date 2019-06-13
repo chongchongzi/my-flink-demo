@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 /**
- * @Description 计算实时热门商品
+ * @Description 计算实时热门商品(参考链接：http://wuchong.me/blog/2018/11/07/use-flink-calculate-hot-items/)
  * @Author chongzi
  * @Date 2019/6/13 17:07
  * @Param 
