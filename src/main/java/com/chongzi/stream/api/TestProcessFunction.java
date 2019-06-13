@@ -18,7 +18,7 @@ public class TestProcessFunction {
         final StreamExecutionEnvironment env= StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
-        // the source data stream
+        // 定义源数据流
         DataStream<OptLog> stream=env
                 .addSource(new SimpleSourceFunction())
                 .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<OptLog>() {
@@ -30,7 +30,7 @@ public class TestProcessFunction {
 
         stream.print();
 
-        // apply the process function onto a keyed stream
+        // 将 process function 应用到一个键控流(keyed stream)中
         DataStream<Tuple2<String, Long>> result = stream
                 .keyBy(new KeySelector<OptLog, String>() {
 
@@ -47,7 +47,7 @@ public class TestProcessFunction {
     }
 
     /**
-     * The data type stored in the state
+     * state中保存的数据类型
      */
     public static class CountWithTimestamp {
         public String key;
@@ -56,11 +56,12 @@ public class TestProcessFunction {
     }
 
     /**
+     * ProcessFunction的实现，用来维护计数和超时
      * 按key计数，如果某个key在30秒之内没有新的数据到来就发出(key,count)
      */
     public static class CountWithTimeoutFunction extends ProcessFunction<OptLog, Tuple2<String, Long>> {
 
-        /** The state that is maintained by this process function */
+        /** process function维持的状态 */
         private ValueState<CountWithTimestamp> state;
 
         @Override
@@ -72,23 +73,23 @@ public class TestProcessFunction {
         public void processElement(OptLog optLog, Context ctx, Collector<Tuple2<String, Long>> out)
                 throws Exception {
 
-            // retrieve the current count
+            // 获取当前的count
             CountWithTimestamp current = state.value();
             if (current == null) {
                 current = new CountWithTimestamp();
                 current.key = optLog.userName;
             }
 
-            // update the state's count
+            // 更新 state 的 count
             current.count++;
 
-            // set the state's timestamp to the record's assigned event time timestamp
+            // 将state的时间戳设置为记录的分配事件时间戳
             current.lastModified = ctx.timestamp();
 
-            // write the state back
+            // 将状态写回
             state.update(current);
 
-            // schedule the next timer 30 seconds from the current event time
+            // 从当前事件时间开始计划下一个30秒的定时器
             ctx.timerService().registerEventTimeTimer(current.lastModified + 30000);
         }
 
@@ -96,10 +97,10 @@ public class TestProcessFunction {
         public void onTimer(long timestamp, OnTimerContext ctx, Collector<Tuple2<String, Long>> out)
                 throws Exception {
 
-            // get the state for the key that scheduled the timer
+            // 获取计划定时器的key的状态
             CountWithTimestamp result = state.value();
 
-            // check if this is an outdated timer or the latest timer
+            // 检查是否是过时的定时器或最新的定时器
             if (timestamp == result.lastModified + 30000) {
                 // emit the state on timeout
                 out.collect(new Tuple2<String, Long>(result.key, result.count));

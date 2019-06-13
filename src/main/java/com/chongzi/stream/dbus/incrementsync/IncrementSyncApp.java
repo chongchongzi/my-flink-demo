@@ -21,8 +21,6 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
 import java.util.Properties;
 
 /**
- * @Author: 🐟lifei🐟
- * @Date: 2019/3/3 下午1:54
  * 增量同步flink app
  */
 public class IncrementSyncApp {
