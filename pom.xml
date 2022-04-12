@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <flink.version>1.7.0</flink.version>
-        <hadoop.version>2.4.1</hadoop.version>
+        <hadoop.version>3.2.3</hadoop.version>
         <guava.version>18.0</guava.version>
         <akka.version>2.4.20</akka.version>
         <java.version>1.8</java.version>
