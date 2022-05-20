@@ -42,7 +42,7 @@
         <druid.version>2.4</druid.version>
         <avatica.version>1.10.0</avatica.version>
         <hutool.varsion>4.1.15</hutool.varsion>
-        <gson.varsion>2.8.5</gson.varsion>
+        <gson.varsion>2.8.9</gson.varsion>
     </properties>
 
     <dependencies>
